@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlcoCalendar - 飲酒・禁酒記録カレンダー | 公式サポート</title>
+    <meta name="description" content="あなたの飲酒習慣を見える化し、健康的なライフスタイルをサポートするカレンダーアプリ">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ffeef8 0%, #f3e7f9 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff6b9d, #c44589);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(196, 69, 137, 0.3);
+        }
+        
+        .header-text h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .header-text p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ff6b9d, #c44589);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .download-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b9d, #c44589);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 8px 25px rgba(196, 69, 137, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(196, 69, 137, 0.4);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #2d3748;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .support-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin: 40px 0;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .support-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .support-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .support-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+        
+        .support-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .privacy-section {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 60px;
+            margin: 40px 0;
+        }
+        
+        .privacy-section h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2d3748;
+        }
+        
+        .privacy-section h4 {
+            font-size: 20px;
+            margin: 25px 0 15px 0;
+            color: #4a5568;
+        }
+        
+        .privacy-section h5 {
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+            color: #4a5568;
+        }
+        
+        .privacy-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .privacy-section p, .privacy-section li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .support-section,
+            .privacy-section {
+                padding: 40px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="app-icon">🗓️</div>
+                <div class="header-text">
+                    <h1>AlcoCalendar</h1>
+                    <p>飲酒・禁酒記録カレンダー</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>健康的な飲酒習慣を<br>始めませんか？</h2>
+                <p>あなたの飲酒習慣を見える化し、健康的なライフスタイルをサポートするカレンダーアプリです。</p>
+                <a href="https://apps.apple.com/us/app/%E3%82%A2%E3%83%AB%E3%82%B3%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC/id6748570400" class="download-button">
+                    📱 App Storeでダウンロード
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">🎯 主な機能</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📅</div>
+                        <h3>カレンダー表示</h3>
+                        <p>月間の飲酒・禁酒記録を一目で確認。直感的な日付タップで簡単記録。美しいアイコンで記録状況を視覚化します。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🍷</div>
+                        <h3>詳細な飲酒記録</h3>
+                        <p>11種類のお酒に対応（ビール、ワイン、日本酒、焼酎、ウイスキーなど）。量と度数から純アルコール量を自動計算。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🍃</div>
+                        <h3>禁酒記録</h3>
+                        <p>禁酒日の記録で継続をサポート。禁酒の理由やその日の気持ちをメモ。連続禁酒日数の確認でモチベーション向上。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>統計機能</h3>
+                        <p>今日・今月の飲酒量を自動集計。純アルコール量での健康管理。飲酒日数の把握で適度な飲酒習慣作り。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">☁️</div>
+                        <h3>iCloud同期</h3>
+                        <p>iPhone、iPad間でデータを自動同期。データの安全なバックアップ。機種変更時も安心のデータ移行。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>プライバシー重視</h3>
+                        <p>記録はすべてあなたのiCloudに保存。個人情報は一切収集しません。安心してご利用いただけます。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="support-section">
+                    <h2 class="section-title">🆘 サポート</h2>
+                    <p style="text-align: center; font-size: 18px; color: #666; margin-bottom: 20px;">
+                        AlcoCalendarの使用に関してご質問やご要望がございましたら、お気軽にお問い合わせください。
+                    </p>
+                    
+                    <div class="support-grid">
+                        <div class="support-item">
+                            <h3>📝 機能改善・不具合報告</h3>
+                            <p>アプリの改善提案や不具合の報告はこちらから</p>
+                            <a href="https://docs.google.com/forms/d/11hRZJK_GeI2AvnxoL67WBUOz5L14b2_SL9Rl15C_gW8/viewform" class="support-link">
+                                フィードバックフォーム
+                            </a>
+                        </div>
+                        
+                        <div class="support-item">
+                            <h3>⭐ App Storeレビュー</h3>
+                            <p>アプリを気に入っていただけましたら、レビューをお願いします</p>
+                            <a href="https://apps.apple.com/us/app/%E3%82%A2%E3%83%AB%E3%82%B3%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC/id6748570400" class="support-link">
+                                レビューを書く
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="privacy-section">
+                    <h3>🔒 プライバシーポリシー / Privacy Policy</h3>
+                    <p><strong>AlcoCalendar</strong><br>
+                    最終更新日: 2025年7月13日</p>
+
+                    <h4>日本語版</h4>
+
+                    <h5>1. はじめに</h5>
+                    <p>本プライバシーポリシーは、AlcoCalendar（以下「本アプリ」）における個人情報の取り扱いについて説明するものです。</p>
+
+                    <h5>2. 収集する情報</h5>
+                    
+                    <h5>2.1 飲酒・禁酒記録データ</h5>
+                    <ul>
+                        <li>飲酒記録（日付、お酒の種類、量、度数、メモ）</li>
+                        <li>禁酒記録（日付、メモ）</li>
+                    </ul>
+
+                    <h5>2.2 iCloudデータ</h5>
+                    <ul>
+                        <li>本アプリはApple CloudKitを使用してデータを同期します</li>
+                        <li>データはユーザーのiCloudアカウントに保存されます</li>
+                        <li>Appleのプライバシーポリシーが適用されます</li>
+                    </ul>
+
+                    <h5>2.3 広告関連データ</h5>
+                    <ul>
+                        <li>Google Mobile Adsを使用した広告配信</li>
+                        <li>広告識別子（IDFA）</li>
+                        <li>Googleのプライバシーポリシーが適用されます</li>
+                    </ul>
+
+                    <h5>3. 情報の利用目的</h5>
+                    <ul>
+                        <li>アプリ機能の提供（記録の保存・表示・同期）</li>
+                        <li>広告の配信</li>
+                        <li>アプリの改善</li>
+                    </ul>
+
+                    <h5>4. 情報の共有</h5>
+                    <ul>
+                        <li>飲酒・禁酒記録はiCloud経由でユーザーのデバイス間でのみ共有</li>
+                        <li>第三者への提供は行いません</li>
+                    </ul>
+
+                    <h5>5. データの保存期間</h5>
+                    <ul>
+                        <li>ユーザーがアプリを削除するまで</li>
+                        <li>iCloudデータはAppleのポリシーに従います</li>
+                    </ul>
+
+                    <h5>6. ユーザーの権利</h5>
+                    <ul>
+                        <li>データの削除：アプリ内での削除、またはアプリのアンインストール</li>
+                        <li>広告の無効化：iOS設定から可能</li>
+                    </ul>
+
+                    <h5>7. セキュリティ</h5>
+                    <ul>
+                        <li>iCloudの暗号化によりデータを保護</li>
+                        <li>ローカルデータはiOSのサンドボックスで保護</li>
+                    </ul>
+
+                    <h5>8. 第三者サービス</h5>
+                    <ul>
+                        <li><strong>Apple CloudKit</strong>: Appleプライバシーポリシー</li>
+                        <li><strong>Google Mobile Ads</strong>: Googleプライバシーポリシー</li>
+                    </ul>
+
+                    <h5>9. 変更について</h5>
+                    <p>本ポリシーの変更時はアプリ内で通知します。</p>
+
+                    <h5>10. お問い合わせ</h5>
+                    <p>ご質問がございましたら、App Store経由でお問い合わせください。</p>
+
+                    <hr style="margin: 40px 0;">
+
+                    <h4>English Version</h4>
+
+                    <h5>1. Introduction</h5>
+                    <p>This Privacy Policy explains how AlcoCalendar ("the App") handles personal information.</p>
+
+                    <h5>2. Information We Collect</h5>
+                    
+                    <h5>2.1 Drinking Records Data</h5>
+                    <ul>
+                        <li>Drinking records (date, alcohol type, amount, percentage, notes)</li>
+                        <li>Sobriety records (date, notes)</li>
+                    </ul>
+
+                    <h5>2.2 iCloud Data</h5>
+                    <ul>
+                        <li>The App uses Apple CloudKit for data synchronization</li>
+                        <li>Data is stored in your iCloud account</li>
+                        <li>Apple's Privacy Policy applies</li>
+                    </ul>
+
+                    <h5>2.3 Advertising Data</h5>
+                    <ul>
+                        <li>Google Mobile Ads for advertisement delivery</li>
+                        <li>Advertising Identifier (IDFA)</li>
+                        <li>Google's Privacy Policy applies</li>
+                    </ul>
+
+                    <h5>3. Purpose of Use</h5>
+                    <ul>
+                        <li>Providing app functionality (saving, displaying, syncing records)</li>
+                        <li>Advertisement delivery</li>
+                        <li>App improvement</li>
+                    </ul>
+
+                    <h5>4. Information Sharing</h5>
+                    <ul>
+                        <li>Drinking/sobriety records are only shared between your devices via iCloud</li>
+                        <li>We do not share data with third parties</li>
+                    </ul>
+
+                    <h5>5. Data Retention</h5>
+                    <ul>
+                        <li>Until you delete the app</li>
+                        <li>iCloud data follows Apple's policies</li>
+                    </ul>
+
+                    <h5>6. User Rights</h5>
+                    <ul>
+                        <li>Data deletion: Delete within app or uninstall the app</li>
+                        <li>Disable ads: Available in iOS Settings</li>
+                    </ul>
+
+                    <h5>7. Security</h5>
+                    <ul>
+                        <li>Data protected by iCloud encryption</li>
+                        <li>Local data protected by iOS sandbox</li>
+                    </ul>
+
+                    <h5>8. Third-Party Services</h5>
+                    <ul>
+                        <li><strong>Apple CloudKit</strong>: Apple Privacy Policy</li>
+                        <li><strong>Google Mobile Ads</strong>: Google Privacy Policy</li>
+                    </ul>
+
+                    <h5>9. Changes</h5>
+                    <p>We will notify users through the app when this policy changes.</p>
+
+                    <h5>10. Contact</h5>
+                    <p>For questions, please contact us through the App Store.</p>
+
+                    <hr style="margin: 40px 0;">
+
+                    <p><strong>開発者</strong>: 清水良一<br>
+                    <strong>アプリ名</strong>: AlcoCalendar<br>
+                    <strong>Bundle ID</strong>: com.kirillovlov.AlcoCalendar</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2025 清水良一 (Ryoichi Shimizu). All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://apps.apple.com/us/app/%E3%82%A2%E3%83%AB%E3%82%B3%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC/id6748570400">App Store</a>
+                    <a href="https://docs.google.com/forms/d/11hRZJK_GeI2AvnxoL67WBUOz5L14b2_SL9Rl15C_gW8/viewform">フィードバック</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
